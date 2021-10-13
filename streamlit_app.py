@@ -35,16 +35,30 @@ from pymongo import MongoClient
 def mongo_connect(url):
     return MongoClient(url)
 
-#client = mongo_connect('mongodb://localhost:27017')
-client = mongo_connect(**st.secrets['mongo'])
+client = mongo_connect('mongodb://localhost:27017')
 
 ################################################################################
 # Get MongoDB
-db = client.dog_rates_images
+#db = client.dog_rates_images
 
 # Get 'tweets' and 'media' collections
-tweets_data = db.tweets
-tweets_media = db.media
+#tweets_data = db.tweets
+#tweets_media = db.media
+
+existing_tweets = json.load(open('dog_rates_tweets.json', 'r'))
+existing_tweets_media = json.load(open('dog_rates_tweets_media.json', 'r'))
+
+# Create MongoDB with given Twitter handle
+db = client[f'dog_rates_images']
+
+# Create 'tweets' and 'media' collections
+tweets = db.tweets
+media = db.media
+
+# Insert Tweets to collection
+tweets.insert_many(existing_tweets)
+# Insert media to collection
+media.insert_many(existing_tweets_media);
 ################################################################################
 
 
