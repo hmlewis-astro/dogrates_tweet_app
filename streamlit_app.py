@@ -53,13 +53,13 @@ existing_tweets_media = json.load(open('dog_rates_tweets_media.json', 'r'))
 db = client[f'dog_rates_images']
 
 # Create 'tweets' and 'media' collections
-tweets = db.tweets
-media = db.media
+tweets_data = db.tweets
+tweets_media = db.media
 
 # Insert Tweets to collection
-tweets.insert_many(existing_tweets)
+tweets_data.insert_many(existing_tweets)
 # Insert media to collection
-media.insert_many(existing_tweets_media);
+tweets_media.insert_many(existing_tweets_media);
 ################################################################################
 
 
