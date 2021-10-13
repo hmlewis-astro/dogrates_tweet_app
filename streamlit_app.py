@@ -36,7 +36,8 @@ from pymongo import MongoClient
 def mongo_connect(url):
     return MongoClient(url)
 
-client = mongo_connect('mongodb://localhost:27017')
+#client = mongo_connect('mongodb://localhost:27017')
+client = mongo_connect()
 
 ################################################################################
 # Get MongoDB
