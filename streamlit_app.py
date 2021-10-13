@@ -2,6 +2,7 @@
 To run this app, run `streamlit run streamlit_app.py` from inside this directory
 '''
 import requests
+import json
 
 import streamlit as st
 # Set app title and favicon
