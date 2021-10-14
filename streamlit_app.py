@@ -50,6 +50,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Sample from Tweets with fewest favorites
+#TODO: set limit based on current size of the tweets_data collection
 pipeline = [
     {'$sort': {'favorite_count':1}},
     {'$limit':25},
@@ -130,3 +131,15 @@ else:
     #### Sorry, there aren't any Tweets featuring dogs of the {option} breed.
     #### Please select a different breed and we can show you some other good dogs! 🐶
     """)
+################################################################################
+
+
+st.info("The Tweets included in this webapp are updated (approximately) monthly. If the Tweets shown here appear to be significantly out-of-date (i.e., all Tweets are older than 6 months) please complete the form below to notify the app developer!")
+
+st.markdown("""
+<form action="https://formsubmit.co/your@email.com" method="POST">
+     <input type="text" name="name" required>
+     <input type="email" name="email" required>
+     <button type="submit">Send</button>
+</form>
+""", unsafe_allow_html=True)
