@@ -176,7 +176,7 @@ if len(tweets_list) > 0:
 else:
     st.markdown(f"""
     <div>
-    Sorry, there aren't any Tweets featuring dogs of the {option} breed. <br><br>
+    <h4>Sorry, there aren't any Tweets featuring dogs of the {option} breed.</h4> <br><br>
     Please select a different breed and we can show you some other good dogs! 🐶
     </div>
     <br><br>
