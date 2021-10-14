@@ -1,5 +1,2 @@
-# Ignore .DS_Store
+# Ignore OS generated files
 .DS_Store
-
-# Ignore API key files
-.streamlit*
