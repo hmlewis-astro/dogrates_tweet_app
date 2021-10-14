@@ -2,6 +2,7 @@
 To run this app, run `streamlit run streamlit_app.py` from inside this directory
 '''
 import os
+import dns
 import requests
 
 import streamlit as st
@@ -13,7 +14,6 @@ st.set_page_config(page_title="The Underdogs",
 import numpy as np
 import pandas as pd
 
-#from boto.s3.connection import S3Connection
 uri = os.environ['MONGODB_URI']
 
 from pymongo import MongoClient
