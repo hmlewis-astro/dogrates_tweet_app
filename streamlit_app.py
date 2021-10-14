@@ -42,11 +42,7 @@ tweets_media = db.media
 
 #Display title for streamlit app
 st.markdown("""
-<h1 style='text-align: center;'>The Underdogs</h1>
-""", unsafe_allow_html=True)
-
-st.markdown("""
-<h2 style='text-align: center;'>A compilation of the underappreciated dogs tweeted by <a href='https://twitter.com/dog_rates'>WeRateDogs</a>. 💗</h2>
+<div align='center'><h1 style=font-size:60px>The Underdogs</h1></div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
@@ -88,8 +84,9 @@ with open('breed_name.csv', 'r') as f:
 
 names = sorted(list(map(split_breed_name, names)))
 
+
 st.markdown("""
-<h2 style='text-align: center;'>View Tweets featuring dogs of a specific breed.</h2>
+<div align='center'><h2>View Tweets featuring dogs of a specific breed.</h2></div>
 """, unsafe_allow_html=True)
 
 # Select breed from drop-down
