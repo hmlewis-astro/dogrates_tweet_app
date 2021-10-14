@@ -174,10 +174,13 @@ if len(tweets_list) > 0:
 
 
 else:
-    st.write(f"""
-    #### Sorry, there aren't any Tweets featuring dogs of the {option} breed.
-    #### Please select a different breed and we can show you some other good dogs! 🐶
-    """)
+    st.markdown(f"""
+    <div>
+    Sorry, there aren't any Tweets featuring dogs of the {option} breed. <br><br>
+    Please select a different breed and we can show you some other good dogs! 🐶
+    </div>
+    <br><br>
+    """, unsafe_allow_html=True)
 ################################################################################
 
 
@@ -197,7 +200,6 @@ info_header("""The Tweets included in this webapp are updated frequently. \
  Thank you for your support!""")
 
 #TODO: fix submit button colors
-#<form action="https://formsubmit.co/hanlewis528@gmail.com" method="POST">
 st.markdown("""
 <form action="https://formsubmit.co/a0a0b3e876f618f6e89f121c34461374" method="POST">
      <input type="text" name="Name" placeholder="Your Name" required>
