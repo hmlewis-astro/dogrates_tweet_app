@@ -49,6 +49,10 @@ st.markdown("""
 <h2 style='text-align: center;'>A compilation of the underappreciated dogs tweeted by <a href='https://twitter.com/dog_rates'>WeRateDogs</a>. 💗</h2>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+<div align='center'><h2>A compilation of the underappreciated dogs tweeted by <a href='https://twitter.com/dog_rates'>WeRateDogs</a>. 💗</h2></div>
+""", unsafe_allow_html=True)
+
 # Sample from Tweets with fewest favorites
 pipeline = [
     {'$sort': {'favorite_count':1}},
