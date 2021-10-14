@@ -1,8 +1,8 @@
 '''
 To run this app, run `streamlit run streamlit_app.py` from inside this directory
 '''
+import os
 import requests
-import json
 
 import streamlit as st
 # Set app title and favicon
@@ -10,24 +10,11 @@ st.set_page_config(page_title="The Underdogs",
                    page_icon="🐶",
                    layout="wide")
 
-# Set default app width
-# st.markdown(
-#         f"""
-# <style>
-#     .reportview-container .main .block-container{{
-#         max-width: 600px;
-#     }}
-#     .reportview-container .main {{
-#         color: #000000;
-#         background-color: #FFFFFF;
-#     }}
-# </style>
-# """,
-#         unsafe_allow_html=True,
-#     )
-
 import numpy as np
 import pandas as pd
+
+#from boto.s3.connection import S3Connection
+uri = os.environ['MONGODB_URI']
 
 from pymongo import MongoClient
 
@@ -37,30 +24,15 @@ def mongo_connect(url):
     return MongoClient(url)
 
 #client = mongo_connect('mongodb://localhost:27017')
-client = mongo_connect()
+client = mongo_connect(uri)
 
 ################################################################################
 # Get MongoDB
-#db = client.dog_rates_images
+db = client.dog_rates_images
 
 # Get 'tweets' and 'media' collections
-#tweets_data = db.tweets
-#tweets_media = db.media
-
-existing_tweets = json.load(open('dog_rates_tweets.json', 'r'))
-existing_tweets_media = json.load(open('dog_rates_tweets_media.json', 'r'))
-
-# Create MongoDB with given Twitter handle
-db = client[f'dog_rates_images']
-
-# Create 'tweets' and 'media' collections
 tweets_data = db.tweets
 tweets_media = db.media
-
-# Insert Tweets to collection
-tweets_data.insert_many(existing_tweets)
-# Insert media to collection
-tweets_media.insert_many(existing_tweets_media);
 ################################################################################
 
 
