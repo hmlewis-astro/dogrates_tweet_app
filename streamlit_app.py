@@ -1,6 +1,9 @@
 '''
 To run this app, run `streamlit run streamlit_app.py` from inside this directory
 '''
+# Define whether working in development mode (True, i.e., localhost) or in deployment mode (False, i.e., Heroku)
+dev_mode = False
+
 import os
 import requests
 
@@ -14,8 +17,9 @@ import numpy as np
 import pandas as pd
 
 # For deployed Streamlit app
-import dns
-uri = os.environ['MONGODB_URI']
+if not dev_mode:
+    import dns
+    uri = os.environ['MONGODB_URI']
 
 from pymongo import MongoClient
 
@@ -24,11 +28,13 @@ from pymongo import MongoClient
 def mongo_connect(url):
     return MongoClient(url)
 
-# For local Streamlit app
-#client = mongo_connect('mongodb://localhost:27017')
+# For deployed app
+if not dev_mode:
+    client = mongo_connect(uri)
 
-# For deployed Streamlit app
-client = mongo_connect(uri)
+# For local app
+if dev_mode:
+    client = mongo_connect('mongodb://localhost:27017')
 
 ################################################################################
 # Get MongoDB
@@ -40,20 +46,52 @@ tweets_media = db.media
 ################################################################################
 
 
-#Display title for streamlit app
+# Hide menu at top of screen
 st.markdown("""
-<div align='center'><h1 style=font-size:60px>The Underdogs</h1></div>
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+</style>
+""", unsafe_allow_html=True)
+
+# Display title for streamlit app
+st.markdown("""
+<div align='center'>
+<h1 style=font-size:56px>
+The Underdogs
+</h1>
+</div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
-<div align='center'><h2>A compilation of the underappreciated dogs tweeted by <a href='https://twitter.com/dog_rates'>WeRateDogs</a>. 💗</h2></div>
+<div align='center'>
+<h2>
+A compilation of underappreciated dogs tweeted by <a href='https://twitter.com/dog_rates'>WeRateDogs</a>.
+</h2>
+</div>
 """, unsafe_allow_html=True)
+
+st.markdown("""
+<br>
+<div>
+The dogs highlighted here received fewer 💗favorites💗 than most of the dogs rated by the WeRateDogs account. We think they deserve some more love, because they're <i>all</i> good dogs.
+<br>
+<br>
+Below, you can also view Tweets featuring dogs of your favorite breed. Just scroll down and choose a breed!
+<br>
+<br>
+</div>
+""", unsafe_allow_html=True)
+################################################################################
+
 
 # Sample from Tweets with fewest favorites
-#TODO: set limit based on current size of the tweets_data collection
+# Set limit based on current size of the Tweets collection
+limit = tweets_data.count_documents({}) // 10
+
 pipeline = [
     {'$sort': {'favorite_count':1}},
-    {'$limit':25},
+    {'$limit':limit},
     {'$sample': {'size':3}}
 ]
 
@@ -105,7 +143,7 @@ if len(tweets_list) > 0:
         breed_index = tweet['predicted_breed']['breed'].index(option)
         weights.append(float(tweet['predicted_breed']['probability'][breed_index]))
 
-    weights = np.array(weights)
+    weights = (np.array(weights)*100)**2
     weights /= sum(weights)
 
     size = 3
@@ -114,6 +152,7 @@ if len(tweets_list) > 0:
 
     cols_list = st.columns(size)
 
+    # Weight random select by probability of breed from the classification model
     tweets_list = np.random.choice(tweets_list, size=size, replace=False, p=weights)
 
     for i,tweet in enumerate(tweets_list):
@@ -134,12 +173,38 @@ else:
 ################################################################################
 
 
-st.info("The Tweets included in this webapp are updated (approximately) monthly. If the Tweets shown here appear to be significantly out-of-date (i.e., all Tweets are older than 6 months) please complete the form below to notify the app developer!")
+def info_header(text):
+     st.markdown(f"""
+     <p style='background-color:#D2ECFC;
+               color:#14171A;
+               font-size:16px;
+               border-radius:2px;
+               padding: 10px 18px 10px 18px;
+               '>{text}</p>
+     """, unsafe_allow_html=True)
 
+info_header("""The Tweets included in this webapp are updated frequently. \
+ If the Tweets shown here appear to be significantly out-of-date (e.g., all Tweets are older than 6 months) please complete the form below to notify the app developer.<br><br> \
+ If you have any other concerns, questions, a bug/issue to report, or comments (positive or negative!), please also fill out the form below. The developer will be in touch if needed.<br><br>
+ Thank you for your support!""")
+
+#TODO: fix submit button colors
 st.markdown("""
-<form action="https://formsubmit.co/your@email.com" method="POST">
-     <input type="text" name="name" required>
-     <input type="email" name="email" required>
-     <button type="submit">Send</button>
+<form action="https://formsubmit.co/hanlewis528@gmail.com" method="POST">
+     <input type="text" name="Name" placeholder="Your Name" required>
+     <input type="email" name="Email" placeholder="Email Address" required>
+     <textarea name="Comment" placeholder="Comment" required></textarea>
+     <input type="text" name="_honey" style="display:none">
+     <input type="hidden" name="_autoresponse" value="Your comment has been submitted to the developer of The Underdogs webapp. Thank you!">
+     <input type="hidden" name="_template" value="box">
+     <button type="submit">Submit</button>
 </form>
 """, unsafe_allow_html=True)
+
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"""
+        <style>{f.read()}</style>
+        """, unsafe_allow_html=True)
+
+local_css('style/style.css')
