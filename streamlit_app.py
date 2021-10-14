@@ -2,7 +2,6 @@
 To run this app, run `streamlit run streamlit_app.py` from inside this directory
 '''
 import os
-import dns
 import requests
 
 import streamlit as st
@@ -14,6 +13,8 @@ st.set_page_config(page_title="The Underdogs",
 import numpy as np
 import pandas as pd
 
+# For deployed Streamlit app
+import dns
 uri = os.environ['MONGODB_URI']
 
 from pymongo import MongoClient
@@ -23,7 +24,10 @@ from pymongo import MongoClient
 def mongo_connect(url):
     return MongoClient(url)
 
+# For local Streamlit app
 #client = mongo_connect('mongodb://localhost:27017')
+
+# For deployed Streamlit app
 client = mongo_connect(uri)
 
 ################################################################################
