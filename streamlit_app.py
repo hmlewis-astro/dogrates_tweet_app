@@ -13,6 +13,14 @@ st.set_page_config(page_title="The Underdogs",
                    page_icon="🐶",
                    layout="wide")
 
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"""
+        <style>{f.read()}</style>
+        """, unsafe_allow_html=True)
+
+local_css('style/style.css')
+
 import numpy as np
 import pandas as pd
 
@@ -54,7 +62,7 @@ footer {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
-# Display title for streamlit app
+# Display title for streamlit ap
 st.markdown("""
 <div align='center'>
 <h1 style=font-size:56px>
@@ -200,11 +208,3 @@ st.markdown("""
      <button type="submit">Submit</button>
 </form>
 """, unsafe_allow_html=True)
-
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f"""
-        <style>{f.read()}</style>
-        """, unsafe_allow_html=True)
-
-local_css('style/style.css')
