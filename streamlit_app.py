@@ -66,7 +66,7 @@ The Underdogs
 st.markdown("""
 <div align='center'>
 <h2>
-A compilation of underappreciated dogs tweeted by <a href='https://twitter.com/dog_rates'>WeRateDogs</a>.
+A compilation of underappreciated dogs tweeted by <a href='https://twitter.com/dog_rates'>WeRateDogs</a>. 💗
 </h2>
 </div>
 """, unsafe_allow_html=True)
@@ -74,7 +74,7 @@ A compilation of underappreciated dogs tweeted by <a href='https://twitter.com/d
 st.markdown("""
 <br>
 <div>
-The dogs highlighted here received fewer 💗favorites💗 than most of the dogs rated by the WeRateDogs account. We think they deserve some more love, because they're <i>all</i> good dogs.
+The dogs highlighted here received fewer favorites than most of the dogs rated by the WeRateDogs account. We think they deserve some more love, because they're <i>all</i> good dogs.
 <br>
 <br>
 Below, you can also view Tweets featuring dogs of your favorite breed. Just scroll down and choose a breed!
