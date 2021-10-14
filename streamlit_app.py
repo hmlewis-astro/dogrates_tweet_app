@@ -197,8 +197,9 @@ info_header("""The Tweets included in this webapp are updated frequently. \
  Thank you for your support!""")
 
 #TODO: fix submit button colors
+#<form action="https://formsubmit.co/hanlewis528@gmail.com" method="POST">
 st.markdown("""
-<form action="https://formsubmit.co/hanlewis528@gmail.com" method="POST">
+<form action="https://formsubmit.co/a0a0b3e876f618f6e89f121c34461374" method="POST">
      <input type="text" name="Name" placeholder="Your Name" required>
      <input type="email" name="Email" placeholder="Email Address" required>
      <textarea name="Comment" placeholder="Comment" required></textarea>
