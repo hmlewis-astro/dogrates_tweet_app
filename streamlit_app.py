@@ -65,23 +65,19 @@ footer {visibility: hidden;}
 # Display title for streamlit ap
 st.markdown("""
 <div align='center'>
-<h1 style=font-size:56px>
-The Underdogs
-</h1>
+<h1 style=font-size:56px>The Underdogs</h1>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
 <div align='center'>
-<h2>
-A compilation of underappreciated dogs tweeted by <a href='https://twitter.com/dog_rates'>WeRateDogs</a>. 💗
-</h2>
+<h2>A compilation of underappreciated dogs tweeted by <a href='https://twitter.com/dog_rates'>WeRateDogs</a>. 💗</h2>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
-<br>
 <div>
+<br>
 The dogs highlighted here received fewer favorites than most of the dogs rated by the WeRateDogs account. We think they deserve some more love, because they're <i>all</i> good dogs.
 <br>
 <br>
@@ -133,7 +129,9 @@ names = sorted(list(map(split_breed_name, names)))
 
 
 st.markdown("""
-<div align='center'><h2>View Tweets featuring dogs of a specific breed.</h2></div>
+<div align='center'>
+<h2>View Tweets featuring dogs of a specific breed.</h2>
+</div>
 """, unsafe_allow_html=True)
 
 # Select breed from drop-down
@@ -176,10 +174,12 @@ if len(tweets_list) > 0:
 else:
     st.markdown(f"""
     <div>
-    <h4>Sorry, there aren't any Tweets featuring dogs of the {option} breed.</h4> <br><br>
-    Please select a different breed and we can show you some other good dogs! 🐶
+    <h5>Sorry, there aren't any Tweets featuring dogs of the {option} breed.</h5>
+    <br>
+    <h5>Please select a different breed and we can show you some other good dogs! 🐶</h5>
+    <br>
+    <br>
     </div>
-    <br><br>
     """, unsafe_allow_html=True)
 ################################################################################
 
