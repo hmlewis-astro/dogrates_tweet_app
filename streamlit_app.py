@@ -88,11 +88,12 @@ st.markdown("""
 <h2 style='text-align: center;'>View Tweets featuring dogs of a specific breed.</h2>
 """, unsafe_allow_html=True)
 
-default = int(np.random.choice([4, 8, 11, 13, 16, 19, 33, 39, 43, 46, 49, 67, 75, 79, 106, 115]))
+#default = int(np.random.choice([4, 8, 11, 13, 16, 19, 33, 39, 43, 46, 49, 67, 75, 79, 106, 115]))
 # Select breed from drop-down
 option = st.selectbox('Select breed:',
-                      names,
-                      index=default)
+                      names#,
+                      #index=default
+                      )
 
 # Get list of Tweets where selected breed is most likely breed from the classification model
 tweets_list = list(tweets_data.find({'predicted_breed.breed': {'$all': [option]}}))
