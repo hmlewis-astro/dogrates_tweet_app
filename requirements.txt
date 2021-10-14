@@ -2,4 +2,4 @@ streamlit
 requests
 numpy
 pandas
-pymongo
+pymongo[svr]
