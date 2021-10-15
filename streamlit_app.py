@@ -194,7 +194,7 @@ def info_header(text):
                '>{text}</p>
      """, unsafe_allow_html=True)
 
-info_header("""The Tweets included in this webapp are updated frequently. \
+info_header("""The Tweets included in this web app are updated frequently. \
  If the Tweets shown here appear to be significantly out-of-date (e.g., all Tweets are older than 6 months) please complete the form below to notify the app developer.<br><br> \
  If you have any other concerns, questions, a bug/issue to report, or comments (positive or negative!), please also fill out the form below. The developer will be in touch if needed.<br><br>
  Thank you for your support!""")
@@ -206,7 +206,7 @@ st.markdown("""
      <input type="email" name="Email" placeholder="Email Address" required>
      <textarea name="Comment" placeholder="Comment" required></textarea>
      <input type="text" name="_honey" style="display:none">
-     <input type="hidden" name="_autoresponse" value="Your comment has been submitted to the developer of The Underdogs webapp. Thank you!">
+     <input type="hidden" name="_autoresponse" value="Your comment has been submitted to the developer of The Underdogs web app. Thank you!">
      <input type="hidden" name="_template" value="box">
      <button type="submit">Submit</button>
 </form>
